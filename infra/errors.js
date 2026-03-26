@@ -36,6 +36,44 @@ export class ServiceError extends Error {
   }
 }
 
+export class ValidationError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "A validation error occurred.", {
+      cause,
+    });
+    this.name = "ValidationError";
+    this.action = action || "Adjust the Input values and try again.";
+    this.statusCode = 400;
+  }
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Unable to find this resource in the system", {
+      cause,
+    });
+    this.name = "NotFoundError";
+    this.action = action || "Please check if the input parameters are correct";
+    this.statusCode = 404;
+  }
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
+
 export class MethodNotAllowedError extends Error {
   constructor() {
     super("Method Not Allowed For this endpoint");
