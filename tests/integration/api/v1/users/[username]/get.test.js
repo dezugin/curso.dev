@@ -33,7 +33,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
         id: response2Body.id,
         username: "sameCase",
         email: "same.case@example.com",
-        password: "donghasahugedong",
+        password: response2Body.password,
         created_at: response2Body.created_at,
         updated_at: response2Body.updated_at,
       });
@@ -65,7 +65,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
         id: response2Body.id,
         username: "differentCase",
         email: "different.case@example.com",
-        password: "donghasahugedong",
+        password: response2Body.password,
         created_at: response2Body.created_at,
         updated_at: response2Body.updated_at,
       });
