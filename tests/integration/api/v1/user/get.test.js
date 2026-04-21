@@ -87,7 +87,7 @@ describe("GET /api/v1/user", () => {
         action: "Please log in to obtain a valid session token",
         statusCode: 401,
       });
-      / Set-Cookie assertions
+      // Set-Cookie assertions
       const parsedSetCookie = setCookieParser(response, {
         map: true,
       });
