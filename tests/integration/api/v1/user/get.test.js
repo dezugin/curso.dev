@@ -87,6 +87,18 @@ describe("GET /api/v1/user", () => {
         action: "Please log in to obtain a valid session token",
         statusCode: 401,
       });
+      / Set-Cookie assertions
+      const parsedSetCookie = setCookieParser(response, {
+        map: true,
+      });
+
+      expect(parsedSetCookie.session_id).toEqual({
+        name: "session_id",
+        value: "invalid",
+        maxAge: -1,
+        path: "/",
+        httpOnly: true,
+      });
     });
     test("With expired session", async () => {
       jest.useFakeTimers({
@@ -113,6 +125,19 @@ describe("GET /api/v1/user", () => {
         message: "User does not possess active session",
         action: "Please log in to obtain a valid session token",
         statusCode: 401,
+      });
+
+      // Set-Cookie assertions
+      const parsedSetCookie = setCookieParser(response, {
+        map: true,
+      });
+
+      expect(parsedSetCookie.session_id).toEqual({
+        name: "session_id",
+        value: "invalid",
+        maxAge: -1,
+        path: "/",
+        httpOnly: true,
       });
     });
     test("With half period session", async () => {
