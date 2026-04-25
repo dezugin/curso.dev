@@ -12,7 +12,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
     test("With exact case match'", async () => {
       await orchestrator.createUser({
         username: "sameCase",
-        email: "same.case@example.com",
+        email: "same.case@hugaonews.com.br",
         password: "donghasahugedong",
       });
 
@@ -26,7 +26,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
       expect(response2Body).toEqual({
         id: response2Body.id,
         username: "sameCase",
-        email: "same.case@example.com",
+        email: "same.case@hugaonews.com.br",
         password: response2Body.password,
         created_at: response2Body.created_at,
         updated_at: response2Body.updated_at,
@@ -38,7 +38,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
     test("With case mismatch'", async () => {
       await orchestrator.createUser({
         username: "differentCase",
-        email: "different.case@example.com",
+        email: "different.case@hugaonews.com.br",
         password: "donghasahugedong",
       });
       const response2 = await fetch(
@@ -51,7 +51,7 @@ describe("GET /api/v1/users/[username] should return status 200", () => {
       expect(response2Body).toEqual({
         id: response2Body.id,
         username: "differentCase",
-        email: "different.case@example.com",
+        email: "different.case@hugaonews.com.br",
         password: response2Body.password,
         created_at: response2Body.created_at,
         updated_at: response2Body.updated_at,

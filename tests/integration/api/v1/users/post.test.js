@@ -19,7 +19,7 @@ describe("POST /api/v1/users should return status 200", () => {
         },
         body: JSON.stringify({
           username: "DrDong",
-          email: "drdong@example.com",
+          email: "drdong@hugaonews.com.br",
           password: "donghasahugedong",
         }),
       });
@@ -29,7 +29,7 @@ describe("POST /api/v1/users should return status 200", () => {
       expect(responseBody).toEqual({
         id: responseBody.id,
         username: "DrDong",
-        email: "drdong@example.com",
+        email: "drdong@hugaonews.com.br",
         password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
@@ -58,7 +58,7 @@ describe("POST /api/v1/users should return status 200", () => {
         },
         body: JSON.stringify({
           username: "duplicatedEmailUser1",
-          email: "duplicatedEmail@example.com",
+          email: "duplicatedEmail@hugaonews.com.br",
           password: "donghasahugedong",
         }),
       });
@@ -70,7 +70,7 @@ describe("POST /api/v1/users should return status 200", () => {
         },
         body: JSON.stringify({
           username: "duplicatedEmailUser2",
-          email: "DuplicatedEmail@example.com",
+          email: "DuplicatedEmail@hugaonews.com.br",
           password: "donghasahugedong",
         }),
       });
@@ -93,7 +93,7 @@ describe("POST /api/v1/users should return status 200", () => {
         },
         body: JSON.stringify({
           username: "duplicatedUsername",
-          email: "uniqueEmail@example.com",
+          email: "uniqueEmail@hugaonews.com.br",
           password: "donghasahugedong",
         }),
       });
@@ -105,7 +105,7 @@ describe("POST /api/v1/users should return status 200", () => {
         },
         body: JSON.stringify({
           username: "DuplicatedUsername",
-          email: "anotherUniqueEmail@example.com",
+          email: "anotherUniqueEmail@hugaonews.com.br",
           password: "donghasahugedong",
         }),
       });

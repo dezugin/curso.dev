@@ -59,11 +59,11 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
     });
     test("With duplicated 'email'", async () => {
       await orchestrator.createUser({
-        email: "email1@example.com",
+        email: "email1@hugaonews.com.br",
       });
 
       const createdUser2 = await orchestrator.createUser({
-        email: "email2@example.com",
+        email: "email2@hugaonews.com.br",
       });
 
       const response = await fetch(
@@ -74,7 +74,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: "email1@example.com",
+            email: "email1@hugaonews.com.br",
           }),
         },
       );
@@ -126,7 +126,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
     });
     test("With unique 'email'", async () => {
       const uniqueEmailUser = await orchestrator.createUser({
-        email: "uniqueEmail1@example.com",
+        email: "uniqueEmail1@hugaonews.com.br",
       });
 
       const response = await fetch(
@@ -137,7 +137,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: "uniqueEmail2@example.com",
+            email: "uniqueEmail2@hugaonews.com.br",
           }),
         },
       );
@@ -148,7 +148,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
       expect(responseBody).toEqual({
         id: responseBody.id,
         username: uniqueEmailUser.username,
-        email: "uniqueEmail2@example.com",
+        email: "uniqueEmail2@hugaonews.com.br",
         password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,

@@ -21,7 +21,7 @@ describe("POST /api/v1/users should return status 200", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "wrongmail@example.com",
+          email: "wrongmail@hugaonews.com.br",
           password: "right-password",
         }),
       });
@@ -36,7 +36,7 @@ describe("POST /api/v1/users should return status 200", () => {
     });
     test("With correct `email` but incorrect `password`", async () => {
       await orchestrator.createUser({
-        email: "right.email@example.com",
+        email: "right.email@hugaonews.com.br",
       });
       const response = await fetch("http://localhost:3000/api/v1/sessions", {
         method: "POST",
@@ -44,7 +44,7 @@ describe("POST /api/v1/users should return status 200", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "right.email@example.com",
+          email: "right.email@hugaonews.com.br",
           password: "wrong-password",
         }),
       });
@@ -65,7 +65,7 @@ describe("POST /api/v1/users should return status 200", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "wrong.email@example.com",
+          email: "wrong.email@hugaonews.com.br",
           password: "wrong-password",
         }),
       });
@@ -80,7 +80,7 @@ describe("POST /api/v1/users should return status 200", () => {
     });
     test("With correct `email` and correct `password`", async () => {
       const createdUser = await orchestrator.createUser({
-        email: "everything.correct@example.com",
+        email: "everything.correct@hugaonews.com.br",
         password: "everythingIsCorrect",
       });
       const response = await fetch("http://localhost:3000/api/v1/sessions", {
@@ -89,7 +89,7 @@ describe("POST /api/v1/users should return status 200", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "everything.correct@example.com",
+          email: "everything.correct@hugaonews.com.br",
           password: "everythingIsCorrect",
         }),
       });
