@@ -115,7 +115,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
         username: "uniqueUser2",
         email: uniqueUsername.email,
         password: responseBody.password,
-        features: [],
+        features: ["read:activation_token"],
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
@@ -151,7 +151,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
         username: uniqueEmailUser.username,
         email: "uniqueEmail2@hugaonews.com.br",
         password: responseBody.password,
-        features: [],
+        features: ["read:activation_token"],
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
@@ -187,7 +187,7 @@ describe("PATCH /api/v1/users/[username] should return status 200", () => {
         username: newPasswordUser.username,
         email: newPasswordUser.email,
         password: responseBody.password,
-        features: [],
+        features: ["read:activation_token"],
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
