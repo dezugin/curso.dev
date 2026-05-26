@@ -1,4 +1,5 @@
 import orchestrator from "tests/orchestrator";
+import activation from "models/activation.js";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
@@ -8,6 +9,7 @@ beforeAll(async () => {
 });
 
 describe("Use case: registration flow (all succesful)", () => {
+  let createUserResponseBody;
   test("Create user account", async () => {
     const createUserResponse = await fetch(
       "http://localhost:3000/api/v1/users",
@@ -26,7 +28,7 @@ describe("Use case: registration flow (all succesful)", () => {
 
     expect(createUserResponse.status).toBe(201);
 
-    const createUserResponseBody = await createUserResponse.json();
+    createUserResponseBody = await createUserResponse.json();
     expect(createUserResponseBody).toEqual({
       id: createUserResponseBody.id,
       username: "registrationFlow",
@@ -38,7 +40,21 @@ describe("Use case: registration flow (all succesful)", () => {
     });
   });
 
-  test("Receive activation email", async () => {});
+  test("Receive activation email", async () => {
+    const lastEmail = await orchestrator.getLastEmail();
+
+    const activationToken = await activation.findOneByUserId(
+      createUserResponseBody.id,
+    );
+
+    expect(lastEmail.sender).toBe("<no-reply@hugaonews.com.br>");
+    expect(lastEmail.recipients[0]).toBe(
+      "<registration.flow@hugaonews.com.br>",
+    );
+    expect(lastEmail.subject).toBe("Activate your account");
+    expect(lastEmail.text).toContain("registrationFlow");
+    expect(lastEmail.text).toContain(activationToken.id);
+  });
 
   test("Activate account", async () => {});
 
