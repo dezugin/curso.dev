@@ -1,5 +1,6 @@
 import orchestrator from "tests/orchestrator";
 import activation from "models/activation.js";
+import webserver from "infra/webserver.js";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
@@ -43,17 +44,23 @@ describe("Use case: registration flow (all succesful)", () => {
   test("Receive activation email", async () => {
     const lastEmail = await orchestrator.getLastEmail();
 
-    const activationToken = await activation.findOneByUserId(
-      createUserResponseBody.id,
-    );
-
     expect(lastEmail.sender).toBe("<no-reply@hugaonews.com.br>");
     expect(lastEmail.recipients[0]).toBe(
       "<registration.flow@hugaonews.com.br>",
     );
     expect(lastEmail.subject).toBe("Activate your account");
     expect(lastEmail.text).toContain("registrationFlow");
-    expect(lastEmail.text).toContain(activationToken.id);
+
+    const activationTokenId = orchestrator.extractUUID(lastEmail.text);
+
+    expect(lastEmail.text).toContain(
+      `${webserver.origin}/registering/activate/${activationTokenId}`,
+    );
+
+    const activationTokenObject = await activation.findOneValidById(activationTokenId);
+
+    expect(activationTokenObject.user_id).toBe(createUserResponseBody.id);
+    expect(activationTokenObject.used_at).toBe(null);
   });
 
   test("Activate account", async () => {});
