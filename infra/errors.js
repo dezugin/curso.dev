@@ -92,6 +92,25 @@ export class UnauthorizedError extends Error {
   }
 }
 
+export class ForbiddenError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Access Denied", {
+      cause,
+    });
+    this.name = "ForbiddenError";
+    this.action = action || "Verify the required features before proceeding";
+    this.statusCode = 403;
+  }
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
+
 export class MethodNotAllowedError extends Error {
   constructor() {
     super("Method Not Allowed For this endpoint");
